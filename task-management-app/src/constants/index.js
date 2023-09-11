@@ -1,15 +1,70 @@
+import { TbBulb } from "react-icons/tb";
+import {
+  MdAutoGraph,
+  MdDraw,
+  MdHistory,
+  MdOutlineAccessAlarm,
+  MdOutlineGridView,
+  MdOutlineLocalDining,
+  MdOutlineLocalShipping,
+  MdOutlineLunchDining,
+  MdOutlinePushPin,
+  MdOutlineRemoveRedEye,
+  MdOutlineRoute,
+  MdOutlineRssFeed,
+  MdOutlineSmartToy,
+  MdOutlineSms,
+  MdOutlineStarOutline,
+  MdOutlineTagFaces,
+  MdOutlineTaskAlt,
+  MdOutlineViewInAr,
+  MdOutlineWbIncandescent,
+  MdOutlineWifi,
+  MdQrCode,
+  MdRotateRight,
+  MdSentimentVerySatisfied,
+  MdThumbUp
+} from "react-icons/md";
+
 export const colors = [
   "#9400FF",
   "#FF3FA4",
   "#FF9B82",
   "#27005D",
+  "#06de56",
   "#FFC436",
   "#BB2525",
-  "#9EB384",
   "#F8DE22",
   "#E48586",
   "#6C3428",
   "#071952",
-  "#1D5B79",
-  "#6527BE"
+  "#1D5B79"
+];
+
+export const icons = [
+  TbBulb,
+  MdHistory,
+  MdAutoGraph,
+  MdOutlinePushPin,
+  MdOutlineTaskAlt,
+  MdOutlineLocalShipping,
+  MdOutlineStarOutline,
+  MdOutlineWifi,
+  MdOutlineSms,
+  MdOutlineRoute,
+  MdOutlineLunchDining,
+  MdOutlineLocalDining,
+  MdOutlineWbIncandescent,
+  MdOutlineRemoveRedEye,
+  MdOutlineTagFaces,
+  MdOutlineSmartToy,
+  MdOutlineGridView,
+  MdOutlineAccessAlarm,
+  MdOutlineRssFeed,
+  MdOutlineViewInAr,
+  MdSentimentVerySatisfied,
+  MdRotateRight,
+  MdDraw,
+  MdQrCode,
+  MdThumbUp
 ];
