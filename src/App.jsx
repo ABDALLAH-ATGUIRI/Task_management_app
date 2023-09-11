@@ -15,8 +15,10 @@ const App = ({ tasks, addProgressiveColumn }) => {
   }, [tasks])
 
   const handleAddProgressiveColumn = () => {
-    addProgressiveColumn({ id: `${Math.random(10)}-${Math.random(10)}`, title: '', ticket: {} });
+    addProgressiveColumn({ id: `${Math.random(10)}-${Math.random(10)}`, title: '', tickets: [] });
   };
+
+  useEffect(() => { console.log(tasks); }, [tasks])
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -38,7 +40,7 @@ const App = ({ tasks, addProgressiveColumn }) => {
         <button className="p-2 rounded-md bg-green-500 text-white flex gap-2 items-center" onClick={() => { handleAddProgressiveColumn() }}><LuPlus /> Add section</button>
       </div>
       <div className={`bg-white grid grid-flow-col ${countGridColumns} flex-initial w-full h-screen`}>
-        {tasks.map(({ title, id }, i) => <ProgressiveColumns key={id} title={title} index={i} id={id} />)}
+        {tasks.map(({ title, tickets, id }, i) => <ProgressiveColumns key={id} title={title} index={i} tickets={tickets} id={id} />)}
       </div>
 
     </div>

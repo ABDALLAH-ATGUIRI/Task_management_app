@@ -1,13 +1,14 @@
 import { useEffect, useRef, useState } from 'react';
-import { removeProgressiveColumn, changeTitle } from '../actions/taskActions';
+import { removeProgressiveColumn, changeTitle, addTicket } from '../actions/taskActions';
 import { connect } from 'react-redux';
 import { colors, icons } from '../constants';
 import { MdCheckCircleOutline, MdMoreVert } from 'react-icons/md';
 import { TbTrash } from "react-icons/tb"
 import { LuPlus } from 'react-icons/lu';
+import TaskCard from './Ticket';
 
 
-const ProgressiveColumns = ({ index, id, title, changeTitle, removeProgressiveColumn }) => {
+const ProgressiveColumns = ({ index, id, title, tickets, changeTitle, removeProgressiveColumn, addTicket }) => {
     const inputTitle = useRef()
     const [cardColor, setCardColor] = useState(colors[index])
     const [cardIcon, setCardIcon] = useState(icons[index])
@@ -16,6 +17,10 @@ const ProgressiveColumns = ({ index, id, title, changeTitle, removeProgressiveCo
 
     const emptyTitle = () => {
         currentTitle == "" ? removeProgressiveColumn(id) : changeTitle(id, currentTitle)
+    }
+
+    const newTicket = () => {
+        addTicket({ id, ticket: { id: `${Math.random(10)}-${Math.random(10)}`, name: '', description: '' } })
     }
 
     useEffect(() => { if (currentTitle == "") inputTitle.current.focus() }, [])
@@ -37,7 +42,7 @@ const ProgressiveColumns = ({ index, id, title, changeTitle, removeProgressiveCo
                 <button onClick={() => setShowOptionCard(false)}>
                     <MdMoreVert size={30} />
                 </button>
-                <div className='absolute top-16 left-32 p-4 bg-white rounded-md z-40 w-72' hidden={showOptionCard} onMouseLeave={()=>setShowOptionCard(true)}>
+                <div className='absolute top-20 left-40 p-4 bg-white rounded-md z-30 w-64' hidden={showOptionCard} onMouseLeave={()=>setShowOptionCard(true)}>
                     <div>
                         <span className='text-gray-400 font-normal py-2'>Colors</span>
                         <div className='grid grid-cols-4 gap-4 p-2 flex-wrap'>
@@ -46,17 +51,17 @@ const ProgressiveColumns = ({ index, id, title, changeTitle, removeProgressiveCo
                             }
                         </div>
                     </div>
-                    <div>
+                    {/* <div>
                         <span className='text-gray-400 font-normal py-2'>Icons</span>
                         <div className='grid grid-cols-4 gap-4 p-2 flex-wrap'>
                             {
                                 icons.map((Icon, index) => <span key={index} className='rounded-full cursor-pointer text-2xl text-black h-12 w-12' onClick={() => setCardIcon(Icon)}>{Icon}</span>)
                             }
                         </div>
-                    </div>
+                    </div> */}
                     <div>
                         <span
-                            className='text-red-500 font-medium flex gap-4 hover:bg-red-50 text-md items-center py-2 justify-center cursor-pointer shadow-sm rounded-md shadow-gray-400 focus:shadow-inherit'
+                            className='text-red-500 font-medium flex gap-4 hover:bg-red-50 text-md items-center py-2 justify-center cursor-pointer shadow-sm rounded-md shadow-gray-400 mt-10 focus:shadow-inherit'
                             onClick={() => removeProgressiveColumn(id)}
                         >
                             Delete
@@ -65,22 +70,29 @@ const ProgressiveColumns = ({ index, id, title, changeTitle, removeProgressiveCo
                     </div>
                 </div>
             </span>
-            <span className='w-full p-4 flex justify-center z-10'>
-                <button className='rounded-full bg-white p-2 cursor-pointer'>
-                    <LuPlus />
+
+            <div className='w-full p-4 flex flex-col justify-center items-center gap-8 z-10'>
+                {tickets?.map(({ id }) => <TaskCard key={id} />)}
+                <button className='w-10 h-10 rounded-full bg-white cursor-pointer flex justify-center items-center' onClick={() => newTicket()}>
+                    <LuPlus size={20} />
                 </button>
-            </span>
-            <div className='absolute z-0 h-full flex flex-col items-center justify-center w-full'>
-                <MdCheckCircleOutline size={60} color='#8a9499' />
-                <span className="text-gray-700/60 font-medium text-lg">Aucune tache</span>
             </div>
+
+            {
+                !tickets?.length ?
+                    <div className='absolute z-0 h-5/6 flex flex-col items-center justify-center w-full'>
+                        <MdCheckCircleOutline size={60} color='#8a949966' />
+                        <span className="text-gray-700/30 font-medium text-lg">Aucune tache</span>
+                    </div> : <></>
+            }
         </div>
     )
 }
 
 const mapDispatchToProps = {
     changeTitle,
-    removeProgressiveColumn
+    removeProgressiveColumn,
+    addTicket
 };
 
 const mapStateToProps = (state) => ({

@@ -1,34 +1,35 @@
 import {
   ADD_PROGRESSIVE_COLUMN,
   CHANGE_TITLE,
-  REMOVE_PROGRESSIVE_COLUMN
+  REMOVE_PROGRESSIVE_COLUMN,
+  ADD_TICKET
 } from "../actions/taskActions";
 
 const initialState = [
   {
     id: `${Math.random(10)}-${Math.random(10)}`,
     title: "Story",
-    ticket: {}
+    tickets: []
   },
   {
     id: `${Math.random(10)}-${Math.random(10)}`,
     title: "To Do",
-    ticket: {}
+    tickets: []
   },
   {
     id: `${Math.random(10)}-${Math.random(10)}`,
     title: "In Progress",
-    ticket: {}
+    tickets: []
   },
   {
     id: `${Math.random(10)}-${Math.random(10)}`,
     title: "To verify",
-    ticket: {}
+    tickets: []
   },
   {
     id: `${Math.random(10)}-${Math.random(10)}`,
     title: "Done",
-    ticket: {}
+    tickets: []
   }
 ];
 
@@ -39,12 +40,19 @@ const taskReducer = (state = initialState, action) => {
     }
     case CHANGE_TITLE: {
       const { index, newTitle } = action.payload;
-      return state.map((colomn) =>
-        colomn.id == index ? { ...colomn, title: newTitle } : colomn
+      return state.map((column) =>
+        column.id == index ? { ...column, title: newTitle } : column
       );
     }
-    case REMOVE_PROGRESSIVE_COLUMN:
+    case REMOVE_PROGRESSIVE_COLUMN: {
       return state.filter(({ id }) => id != action.payload);
+    }
+    case ADD_TICKET: {
+      const { id, ticket } = action.payload;
+      return state.map((column) =>
+      column.id == id ? {...column , tickets: [...column.tickets, ticket ] }: column
+      );
+    }
 
     default:
       return state;
