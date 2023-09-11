@@ -8,7 +8,7 @@
     "start": "yarn dev",
     "build": "vite build",
     "eject": "vite eject",
-    "predeplos": "yarn build",
+    "predeploy": "yarn build",
     "deploy": "gh-pages -d build",
     "dev": "vite",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
