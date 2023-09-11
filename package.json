@@ -3,15 +3,21 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "homepage": "https://abdallah-atguiri.github.io/Task_management_app/",
   "scripts": {
-    "dev": "vite",
+    "start": "vite start",
     "build": "vite build",
+    "test": "vite test",
+    "eject": "vite eject",
+    "deploy": "gh-pages -d build",
+    "dev": "vite",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.5",
     "autoprefixer": "^10.4.15",
+    "gh-pages": "^6.0.0",
     "postcss": "^8.4.29",
     "postcss-cli": "^10.1.0",
     "react": "^18.2.0",
