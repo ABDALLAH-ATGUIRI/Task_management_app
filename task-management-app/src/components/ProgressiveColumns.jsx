@@ -7,14 +7,16 @@ import { TbTrash } from "react-icons/tb"
 import { LuPlus } from 'react-icons/lu';
 
 
-const ProgressiveColumns = ({ index, title, changeTitle, removeProgressiveColumn }) => {
+const ProgressiveColumns = ({ index, id, title, changeTitle, removeProgressiveColumn }) => {
     const inputTitle = useRef()
     const [cardColor, setCardColor] = useState(colors[index])
     const [cardIcon, setCardIcon] = useState(icons[index])
     const [currentTitle, setCurrentTitle] = useState(title)
     const [showOptionCard, setShowOptionCard] = useState(true)
 
-    const emptyTitle = () => { currentTitle == "" ? removeProgressiveColumn(index) : changeTitle(index, currentTitle) }
+    const emptyTitle = () => {
+        currentTitle == "" ? removeProgressiveColumn(id) : changeTitle(id, currentTitle)
+    }
 
     useEffect(() => { if (currentTitle == "") inputTitle.current.focus() }, [])
 
@@ -55,7 +57,7 @@ const ProgressiveColumns = ({ index, title, changeTitle, removeProgressiveColumn
                     <div>
                         <span
                             className='text-red-500 font-medium flex gap-4 hover:bg-red-50 text-md items-center py-2 justify-center cursor-pointer shadow-sm rounded-md shadow-gray-400 focus:shadow-inherit'
-                            onClick={() => removeProgressiveColumn(index)}
+                            onClick={() => removeProgressiveColumn(id)}
                         >
                             Delete
                             <TbTrash size-2 />

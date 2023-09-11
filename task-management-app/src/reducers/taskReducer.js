@@ -6,22 +6,27 @@ import {
 
 const initialState = [
   {
+    id: `${Math.random(10)}-${Math.random(10)}`,
     title: "Story",
     ticket: {}
   },
   {
+    id: `${Math.random(10)}-${Math.random(10)}`,
     title: "To Do",
     ticket: {}
   },
   {
+    id: `${Math.random(10)}-${Math.random(10)}`,
     title: "In Progress",
     ticket: {}
   },
   {
+    id: `${Math.random(10)}-${Math.random(10)}`,
     title: "To verify",
     ticket: {}
   },
   {
+    id: `${Math.random(10)}-${Math.random(10)}`,
     title: "Done",
     ticket: {}
   }
@@ -34,12 +39,12 @@ const taskReducer = (state = initialState, action) => {
     }
     case CHANGE_TITLE: {
       const { index, newTitle } = action.payload;
-      return state.map((task, taskIndex) =>
-        taskIndex === index ? { ...task, title: newTitle } : task
+      return state.map((colomn) =>
+        colomn.id == index ? { ...colomn, title: newTitle } : colomn
       );
     }
     case REMOVE_PROGRESSIVE_COLUMN:
-      return state.filter((el, index) => index != action.payload);
+      return state.filter(({ id }) => id != action.payload);
 
     default:
       return state;
