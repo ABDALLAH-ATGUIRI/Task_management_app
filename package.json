@@ -6,9 +6,8 @@
   "type": "module",
   "scripts": {
     "start": "yarn dev",
-    "build": "yarn build",
-    "test": "yarn test",
-    "eject": "yarn eject",
+    "build": "vite build",
+    "eject": "vite eject",
     "predeplos": "yarn build",
     "deploy": "gh-pages -d build",
     "dev": "vite",
