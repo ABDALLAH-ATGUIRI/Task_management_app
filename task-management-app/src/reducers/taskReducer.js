@@ -1,4 +1,8 @@
-import { ADD_TASK, CHANGE_TITLE, REMOVE_TASK } from "../actions/taskActions";
+import {
+  ADD_PROGRESSIVE_COLUMN,
+  CHANGE_TITLE,
+  REMOVE_PROGRESSIVE_COLUMN
+} from "../actions/taskActions";
 
 const initialState = [
   {
@@ -25,7 +29,7 @@ const initialState = [
 
 const taskReducer = (state = initialState, action) => {
   switch (action.type) {
-    case ADD_TASK: {
+    case ADD_PROGRESSIVE_COLUMN: {
       return [...state, action.payload];
     }
     case CHANGE_TITLE: {
@@ -34,7 +38,7 @@ const taskReducer = (state = initialState, action) => {
         taskIndex === index ? { ...task, title: newTitle } : task
       );
     }
-    case REMOVE_TASK:
+    case REMOVE_PROGRESSIVE_COLUMN:
       return state.filter((el, index) => index != action.payload);
 
     default:

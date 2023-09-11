@@ -1,22 +1,22 @@
 import { useEffect, useRef, useState } from 'react';
+import { removeProgressiveColumn, changeTitle } from '../actions/taskActions';
+import { connect } from 'react-redux';
+import { colors, icons } from '../constants';
 import { MdCheckCircleOutline, MdMoreVert } from 'react-icons/md';
 import { TbTrash } from "react-icons/tb"
 import { LuPlus } from 'react-icons/lu';
-import { colors, icons } from '../constants';
-import { removeTask, changeTitle } from '../actions/taskActions';
-import { connect } from 'react-redux';
 
 
-const ProgressiveColumns = ({ index, title, changeTitle, removeTask }) => {
+const ProgressiveColumns = ({ index, title, changeTitle, removeProgressiveColumn }) => {
     const inputTitle = useRef()
     const [cardColor, setCardColor] = useState(colors[index])
     const [cardIcon, setCardIcon] = useState(icons[index])
     const [currentTitle, setCurrentTitle] = useState(title)
     const [showOptionCard, setShowOptionCard] = useState(true)
 
-    const emptyTitle = () => { !currentTitle ? removeTask(index) : changeTitle(index, currentTitle) }
+    const emptyTitle = () => { currentTitle == "" ? removeProgressiveColumn(index) : changeTitle(index, currentTitle) }
 
-    useEffect(() => { if (!title) inputTitle.current.focus() }, [])
+    useEffect(() => { if (currentTitle == "") inputTitle.current.focus() }, [])
 
     return (
         <div className={`relative span-1 h-full max-w-96 ${index % 2 == 0 ? "bg-gray-50" : "bg-gray-100"}`}>
@@ -53,7 +53,13 @@ const ProgressiveColumns = ({ index, title, changeTitle, removeTask }) => {
                         </div>
                     </div>
                     <div>
-                        <span className='text-red-500 font-medium flex gap-4 hover:bg-red-50 text-md items-center py-2 justify-center cursor-pointer shadow-sm rounded-md shadow-gray-400 focus:shadow-inherit' onClick={() => removeTask(index)}>Delete<TbTrash size-2 /></span>
+                        <span
+                            className='text-red-500 font-medium flex gap-4 hover:bg-red-50 text-md items-center py-2 justify-center cursor-pointer shadow-sm rounded-md shadow-gray-400 focus:shadow-inherit'
+                            onClick={() => removeProgressiveColumn(index)}
+                        >
+                            Delete
+                            <TbTrash size-2 />
+                        </span>
                     </div>
                 </div>
             </span>
@@ -72,7 +78,7 @@ const ProgressiveColumns = ({ index, title, changeTitle, removeTask }) => {
 
 const mapDispatchToProps = {
     changeTitle,
-    removeTask
+    removeProgressiveColumn
 };
 
 const mapStateToProps = (state) => ({

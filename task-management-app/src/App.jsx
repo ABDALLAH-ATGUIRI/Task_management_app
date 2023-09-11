@@ -1,22 +1,24 @@
-import { useMemo } from 'react';
+import { useEffect, useMemo } from 'react';
+import { connect } from 'react-redux';
+import { addProgressiveColumn } from './actions/taskActions';
 import ProgressiveColumns from "./components/ProgressiveColumns";
 import { MdOutlineGridView, MdOutlineListAlt } from 'react-icons/md';
-import { addTask } from './actions/taskActions';
 import { LuPlus } from 'react-icons/lu';
-import { connect } from 'react-redux';
 
 
 
-const App = ({ tasks, addTask }) => {
+const App = ({ tasks, addProgressiveColumn }) => {
 
   const countGridColumns = useMemo(() => {
     const countOfColumns = tasks.length
-    return 'grid-cols-' + (countOfColumns < 5 ? 5 : countOfColumns)
+    return 'grid-cols-' + countOfColumns
   }, [tasks])
 
-  const handleAddTask = () => {
-    addTask({ title: '', ticket: {} });
+  const handleAddProgressiveColumn = () => {
+    addProgressiveColumn({ title: '', ticket: {} });
   };
+
+  useEffect(() => console.log(tasks), [tasks])
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -35,7 +37,7 @@ const App = ({ tasks, addTask }) => {
             <label htmlFor="group" className="cursor-pointer select-none rounded-r-md p-2 px-6 text-center peer-checked:bg-green-500 peer-checked:font-bold peer-checked:text-white flex items-center"><MdOutlineGridView size={23} /></label>
           </div>
         </div>
-        <button className="p-2 rounded-md bg-green-500 text-white flex gap-2 items-center" onClick={() => { handleAddTask() }}><LuPlus /> Add section</button>
+        <button className="p-2 rounded-md bg-green-500 text-white flex gap-2 items-center" onClick={() => { handleAddProgressiveColumn() }}><LuPlus /> Add section</button>
       </div>
       <div className={`bg-white grid grid-flow-col ${countGridColumns} flex-initial w-full h-screen`}>
         {tasks.map(({ title }, i) => <ProgressiveColumns key={title} title={title} index={i} />)}
@@ -45,7 +47,7 @@ const App = ({ tasks, addTask }) => {
   )
 }
 const mapDispatchToProps = {
-  addTask,
+  addProgressiveColumn,
 };
 
 const mapStateToProps = (state) => ({

@@ -1,15 +1,15 @@
-export const ADD_TASK = "ADD_TASK";
-export const REMOVE_TASK = "REMOVE_TASK";
+export const ADD_PROGRESSIVE_COLUMN = "ADD_PROGRESSIVE_COLUMN";
+export const REMOVE_PROGRESSIVE_COLUMN = "REMOVE_PROGRESSIVE_COLUMN";
 export const CHANGE_TITLE = "CHANGE_TITLE";
 
-export const addTask = (task) => ({
-  type: ADD_TASK,
-  payload: task
+export const addProgressiveColumn = (column) => ({
+  type: ADD_PROGRESSIVE_COLUMN,
+  payload: column
 });
 
-export const removeTask = (task) => ({
-  type: REMOVE_TASK,
-  payload: task
+export const removeProgressiveColumn = (column) => ({
+  type: REMOVE_PROGRESSIVE_COLUMN,
+  payload: column
 });
 
 export const changeTitle = (index, newTitle) => ({
