@@ -2,7 +2,10 @@ import {
   ADD_PROGRESSIVE_COLUMN,
   CHANGE_TITLE,
   REMOVE_PROGRESSIVE_COLUMN,
-  ADD_TICKET
+  ADD_TICKET,
+  REMOVE_TICKET,
+  CHANGE_TICKET_CONTENT,
+  CHANGE_PROGRESSIVE_OF_TICKET
 } from "../actions/taskActions";
 
 const initialState = [
@@ -48,12 +51,64 @@ const taskReducer = (state = initialState, action) => {
       return state.filter(({ id }) => id != action.payload);
     }
     case ADD_TICKET: {
-      const { id, ticket } = action.payload;
+      const ticket = action.payload;
+
       return state.map((column) =>
-      column.id == id ? {...column , tickets: [...column.tickets, ticket ] }: column
+        column.id == ticket.parentId
+          ? { ...column, tickets: [...column.tickets, ticket] }
+          : column
       );
     }
+    case REMOVE_TICKET: {
+      const { parentId, id } = action.payload;
 
+      return state.map((column) => {
+        if (column.id == parentId) {
+          return {
+            ...column,
+            tickets: column.tickets.filter((ticket) => ticket.id != id)
+          };
+        } else {
+          return column;
+        }
+      });
+    }
+    case CHANGE_TICKET_CONTENT: {
+      const { parentId, id, newContent } = action.payload;
+
+      return state.map((column) => {
+        if (column.id == parentId) {
+          return {
+            ...column,
+            tickets: column.tickets.map((ticket) =>
+              ticket.id == id ? { ...ticket, newContent } : ticket
+            )
+          };
+        } else {
+          return column;
+        }
+      });
+    }
+    case CHANGE_PROGRESSIVE_OF_TICKET: {
+      const { ticket, newProgressiveId } = action.payload;
+
+      if (newProgressiveId == ticket.parentId) return state;
+
+      return state.map((column) => {
+        if (column.id == newProgressiveId) {
+          column.tickets.push({ ...ticket, parentId: newProgressiveId });
+        }
+
+        if (column.id == ticket.parentId) {
+          return {
+            ...column,
+            tickets: column.tickets.filter(({ id }) => ticket.id != id)
+          };
+        }
+
+        return column;
+      });
+    }
     default:
       return state;
   }
