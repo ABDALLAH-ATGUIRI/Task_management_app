@@ -1,13 +1,17 @@
-import { useEffect, useMemo } from 'react';
+import { useMemo, useState } from 'react';
+import { DndProvider } from 'react-dnd';
+import { HTML5Backend } from 'react-dnd-html5-backend';
 import { connect } from 'react-redux';
 import { addProgressiveColumn } from './actions/taskActions';
+import HeadBar from './components/headBar';
 import ProgressiveColumns from "./components/ProgressiveColumns";
-import { MdOutlineGridView, MdOutlineListAlt } from 'react-icons/md';
-import { LuPlus } from 'react-icons/lu';
+
 
 
 
 const App = ({ tasks, addProgressiveColumn }) => {
+
+  const [isListView, setIsListView] = useState(false)
 
   const countGridColumns = useMemo(() => {
     const countOfColumns = tasks.length
@@ -18,32 +22,23 @@ const App = ({ tasks, addProgressiveColumn }) => {
     addProgressiveColumn({ id: `${Math.random(10)}-${Math.random(10)}`, title: '', tickets: [] });
   };
 
-  useEffect(() => { console.log(tasks); }, [tasks])
-
   return (
+    <DndProvider backend={HTML5Backend}>
+
     <div className="min-h-screen flex flex-col">
-      <div className="p-6">
+        <div className="p-6 bg-green-100">
         <h1 className="text-xl font-bold">Création dune application de gestion de tâches</h1>
       </div>
-      <div className="flex justify-between p-2 py-5 shadow-6xl">
-        <div className="flex rounded-md bg-gray-200">
-          <div>
-            <input type="radio" name="option" id="list" value="list" className="peer hidden" defaultChecked={true} />
-            <label htmlFor="list" className="cursor-pointer select-none rounded-l-md p-2 px-6 text-center peer-checked:bg-green-500 peer-checked:font-bold peer-checked:text-white flex items-center"><MdOutlineListAlt size={23} /></label>
-          </div>
 
-          <div>
-            <input type="radio" name="option" id="group" value="group" className="peer hidden" defaultChecked={false} />
-            <label htmlFor="group" className="cursor-pointer select-none rounded-r-md p-2 px-6 text-center peer-checked:bg-green-500 peer-checked:font-bold peer-checked:text-white flex items-center"><MdOutlineGridView size={23} /></label>
-          </div>
-        </div>
-        <button className="p-2 rounded-md bg-green-500 text-white flex gap-2 items-center" onClick={() => { handleAddProgressiveColumn() }}><LuPlus /> Add section</button>
-      </div>
-      <div className={`bg-white grid grid-flow-col ${countGridColumns} flex-initial w-full h-screen`}>
-        {tasks.map(({ title, tickets, id }, i) => <ProgressiveColumns key={id} title={title} index={i} tickets={tickets} id={id} />)}
+        <HeadBar handle={handleAddProgressiveColumn} isListView={isListView} handleChangeView={setIsListView} />
+
+        <div className={`bg-white grid ${isListView ? '' : 'lg:grid-flow-col'} ${countGridColumns} flex-initial w-full h-screen`}>
+          {tasks.map(({ title, tickets, id }, i) => <ProgressiveColumns key={id} title={title} index={i} tickets={tickets} id={id} />)}
       </div>
 
     </div>
+    </DndProvider>
+
   )
 }
 const mapDispatchToProps = {
