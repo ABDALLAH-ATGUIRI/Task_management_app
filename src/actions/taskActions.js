@@ -6,9 +6,8 @@ export const REMOVE_TICKET = "REMOVE_TICKET";
 export const CHANGE_TICKET_CONTENT = "CHANGE_TICKET_CONTENT";
 export const CHANGE_PROGRESSIVE_OF_TICKET = "CHANGE_PROGRESSIVE_OF_TICKET";
 
-export const addProgressiveColumn = (column) => ({
+export const addProgressiveColumn = () => ({
   type: ADD_PROGRESSIVE_COLUMN,
-  payload: column
 });
 
 export const removeProgressiveColumn = (column) => ({

@@ -39,7 +39,10 @@ const initialState = [
 const taskReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_PROGRESSIVE_COLUMN: {
-      return [...state, action.payload];
+      return [
+        ...state,
+        { id: `${Math.random(10)}-${Math.random(10)}`, title: "", tickets: [] }
+      ];
     }
     case CHANGE_TITLE: {
       const { index, newTitle } = action.payload;

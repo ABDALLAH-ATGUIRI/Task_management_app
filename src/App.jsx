@@ -1,9 +1,9 @@
-import { useMemo, useState } from 'react';
-import { DndProvider } from 'react-dnd';
-import { HTML5Backend } from 'react-dnd-html5-backend';
+import { useState } from 'react';
 import { connect } from 'react-redux';
-import { addProgressiveColumn } from './actions/taskActions';
+import { DndProvider } from 'react-dnd';
 import HeadBar from './components/headBar';
+import { HTML5Backend } from 'react-dnd-html5-backend';
+import { addProgressiveColumn } from './actions/taskActions';
 import ProgressiveColumns from "./components/ProgressiveColumns";
 
 
@@ -13,13 +13,8 @@ const App = ({ tasks, addProgressiveColumn }) => {
 
   const [isListView, setIsListView] = useState(false)
 
-  const countGridColumns = useMemo(() => {
-    const countOfColumns = tasks.length
-    return 'grid-cols-' + countOfColumns
-  }, [tasks])
-
   const handleAddProgressiveColumn = () => {
-    addProgressiveColumn({ id: `${Math.random(10)}-${Math.random(10)}`, title: '', tickets: [] });
+    addProgressiveColumn();
   };
 
   return (
@@ -32,7 +27,7 @@ const App = ({ tasks, addProgressiveColumn }) => {
 
         <HeadBar handle={handleAddProgressiveColumn} isListView={isListView} handleChangeView={setIsListView} />
 
-        <div className={`bg-white grid ${isListView ? '' : 'lg:grid-flow-col'} ${countGridColumns} flex-initial w-full h-screen`}>
+        <div className={`bg-white grid ${isListView ? '' : 'lg:grid-flow-col'} flex-initial w-full h-screen`}>
           {tasks.map(({ title, tickets, id }, i) => <ProgressiveColumns key={id} title={title} index={i} tickets={tickets} id={id} />)}
       </div>
 
