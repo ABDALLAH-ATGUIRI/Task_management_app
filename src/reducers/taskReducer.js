@@ -6,7 +6,7 @@ import {
   REMOVE_TICKET,
   CHANGE_TICKET_CONTENT,
   CHANGE_PROGRESSIVE_OF_TICKET
-} from "../actions/taskActions";
+} from "../actions/taskActions.js";
 
 const initialState = [
   {

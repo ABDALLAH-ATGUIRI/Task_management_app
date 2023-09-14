@@ -1,4 +1,4 @@
-import { SET_SEARCH_TERM } from "../actions/filterActions";
+import { SET_SEARCH_TERM } from "../actions/filterActions.js";
 
 const initialState = {
   searchTerm: ""

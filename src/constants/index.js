@@ -1,4 +1,4 @@
-import { TbBulb } from "react-icons/tb";
+import { TbBulb } from "react-icons/tb/index.esm.js";
 import {
   MdAutoGraph,
   MdDraw,
@@ -24,7 +24,7 @@ import {
   MdRotateRight,
   MdSentimentVerySatisfied,
   MdThumbUp
-} from "react-icons/md";
+} from "react-icons/md/index.esm.js";
 
 export const colors = [
   "#9400FF",

@@ -1,7 +1,7 @@
 import { combineReducers } from "redux";
 
-import taskReducer from "./taskReducer";
-import filterReducer from "./filterReducer";
+import taskReducer from "./taskReducer.js";
+import filterReducer from "./filterReducer.js";
 
 const rootReducer = combineReducers({
   tasks: taskReducer,
