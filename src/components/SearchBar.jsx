@@ -1,4 +1,5 @@
 import { connect } from "react-redux";
+import PropTypes from 'prop-types';
 import { setSearchTerm } from "../actions/filterActions"
 
 const SearchBar = ({ searchTerm, setSearchTerm }) => {
@@ -31,6 +32,11 @@ const SearchBar = ({ searchTerm, setSearchTerm }) => {
         </div>
     )
 }
+
+SearchBar.propTypes = {
+    searchTerm: PropTypes.string,
+    setSearchTerm: PropTypes.func.isRequired,
+};
 
 const mapStateToProps = (state) => ({ searchTerm: state.searchTerm });
 

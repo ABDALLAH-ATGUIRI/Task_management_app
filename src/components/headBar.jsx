@@ -1,4 +1,5 @@
 import { MdAdd, MdOutlineGridView, MdOutlineListAlt } from 'react-icons/md';
+import PropTypes from 'prop-types';
 import SearchBar from './SearchBar';
 
 const HaedBar = ({ handle, handleChangeView, isListView }) => {
@@ -19,6 +20,11 @@ const HaedBar = ({ handle, handleChangeView, isListView }) => {
       <button className="p-2 rounded-md bg-green-500 text-white flex items-center" onClick={() => { handle() }}><MdAdd size={20} /> Add section</button>
     </div>
   )
+}
+HaedBar.propTypes = {
+  handle: PropTypes.func.isRequired,
+  handleChangeView: PropTypes.func.isRequired,
+  isListView: PropTypes.bool
 }
 
 export default HaedBar

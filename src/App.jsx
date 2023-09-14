@@ -5,8 +5,7 @@ import HeadBar from './components/headBar';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { addProgressiveColumn } from './actions/taskActions';
 import ProgressiveColumns from "./components/ProgressiveColumns";
-
-
+import PropTypes from 'prop-types';
 
 
 const App = ({ tasks, addProgressiveColumn }) => {
@@ -36,6 +35,12 @@ const App = ({ tasks, addProgressiveColumn }) => {
 
   )
 }
+
+App.propTypes = {
+  tasks: PropTypes.array.isRequired,
+  addProgressiveColumn: PropTypes.func.isRequired,
+};
+
 const mapDispatchToProps = {
   addProgressiveColumn,
 };

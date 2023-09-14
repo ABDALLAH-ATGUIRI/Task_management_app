@@ -2,10 +2,10 @@ import { useEffect, useRef, useState } from 'react';
 import { removeProgressiveColumn, changeTitle, addTicket, changeProgressiveOfTicket } from '../actions/taskActions';
 import { connect } from 'react-redux';
 import { useDrop } from 'react-dnd';
+import PropTypes from 'prop-types';
 import { colors, icons } from '../constants';
-import { MdCheckCircleOutline, MdMoreVert } from 'react-icons/md';
+import { MdCheckCircleOutline, MdAdd, MdMoreVert } from 'react-icons/md';
 import { TbTrash } from "react-icons/tb"
-import { LuPlus } from 'react-icons/lu';
 import TaskCard from './Ticket';
 
 
@@ -13,7 +13,7 @@ const ProgressiveColumns = ({ index, id, title, tickets, changeTitle, removeProg
 
     const inputTitle = useRef([])
     const [cardColor, setCardColor] = useState(colors[index])
-    const [cardIcon, setCardIcon] = useState(icons[index])
+    const [cardIcon] = useState(icons[index])
     const [currentTitle, setCurrentTitle] = useState(title)
     const [showOptionCard, setShowOptionCard] = useState(true)
 
@@ -85,7 +85,7 @@ const ProgressiveColumns = ({ index, id, title, tickets, changeTitle, removeProg
                 {tickets?.map((currentTask) => <TaskCard key={currentTask.id} currentTask={currentTask} />)}
 
                 <button className='w-10 h-10 rounded-full bg-white cursor-pointer flex justify-center items-center' onClick={() => newTicket()}>
-                    <LuPlus size={20} />
+                    <MdAdd size={20} />
                 </button>
             </div>
 
@@ -99,6 +99,16 @@ const ProgressiveColumns = ({ index, id, title, tickets, changeTitle, removeProg
         </div>
     )
 }
+ProgressiveColumns.propTypes = {
+    index: PropTypes.number.isRequired,
+    id: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    tickets: PropTypes.array.isRequired,
+    addTicket: PropTypes.func.isRequired,
+    changeTitle: PropTypes.func.isRequired,
+    removeProgressiveColumn: PropTypes.func.isRequired,
+    changeProgressiveOfTicket: PropTypes.func.isRequired,
+};
 
 const mapDispatchToProps = {
     changeTitle,

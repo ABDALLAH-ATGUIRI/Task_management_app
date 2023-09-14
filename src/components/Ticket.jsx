@@ -1,8 +1,9 @@
 import { useEffect, useRef, useState } from "react"
 import { removeTicket, changeTicketContent } from '../actions/taskActions';
+import { MdDragIndicator, MdOutlineRemoveCircleOutline } from "react-icons/md";
 import { connect } from 'react-redux';
 import { useDrag } from "react-dnd";
-import { MdDragIndicator, MdOutlineRemoveCircleOutline } from "react-icons/md";
+import PropTypes from 'prop-types';
 
 
 const Ticket = ({ currentTask, removeTicket, changeTicketContent }) => {
@@ -71,6 +72,13 @@ const Ticket = ({ currentTask, removeTicket, changeTicketContent }) => {
 
   )
 }
+
+Ticket.propTypes = {
+  currentTask: PropTypes.object.isRequired,
+  removeTicket: PropTypes.func.isRequired,
+  changeTicketContent: PropTypes.func.isRequired,
+};
+
 
 const mapDispatchToProps = {
   removeTicket,
