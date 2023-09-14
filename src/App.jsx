@@ -27,8 +27,8 @@ const App = ({ tasks, addProgressiveColumn }) => {
 
     <div className="min-h-screen flex flex-col">
         <div className="p-6 bg-green-100">
-        <h1 className="text-xl font-bold">Création dune application de gestion de tâches</h1>
-      </div>
+          <h1 className="text-xl font-bold">Application for organizing the tasks</h1>
+        </div>
 
         <HeadBar handle={handleAddProgressiveColumn} isListView={isListView} handleChangeView={setIsListView} />
 
