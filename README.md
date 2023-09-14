@@ -1,8 +1,41 @@
-# React + Vite
+# Task Management App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A simple task management application built using React, Vite, React Icons, React DnD, Redux, and Tailwind CSS.
 
-Currently, two official plugins are available:
+![Screenshot 2023-09-14 170807](https://github.com/ABDALLAH-ATGUIRI/Task_management_app/assets/94124850/f6e7297f-0b8a-4d50-96e5-730fc074f879)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
+
+- Create tasks with titles and descriptions.
+- Update task details and mark them as complete.
+- Reorder tasks using drag-and-drop functionality.
+- Delete tasks you no longer need.
+
+
+## Technologies Used
+
+- React
+- Vite
+- React Icons
+- React DnD (Drag and Drop)
+- Redux
+- Tailwind CSS
+- CSS (or your preferred styling framework)
+
+## Getting Started
+
+Follow these steps to set up and run the application on your local machine:
+
+1. **Clone the repository:**
+
+   ```bash
+   git clone https://github.com/your-username/task-management-app.git
+   cd task-management-app
+
+2. **Install dependencies:**
+   ```bash
+   yarn install
+   
+3. **Start the development server::**
+   ```bash
+   yarn dev
